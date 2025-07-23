@@ -56,8 +56,16 @@ public class BudgetBalanceService {
         return BudgetBalanceDTO.builder()
                                 .id(budgetId)
                                 .categories(categories)
-                                .planned(categories.stream().mapToDouble(TransactionCategoryDTO::getPlanned).sum())
-                                .expenses(categories.stream().mapToDouble(TransactionCategoryDTO::getExpenses).sum())
+                                .planned(categories.stream()
+                                    .map(TransactionCategoryDTO::getPlanned)
+                                    .filter(planned -> planned != null)
+                                    .mapToDouble(Double::doubleValue)
+                                    .sum())
+                                .expenses(categories.stream()
+                                    .map(TransactionCategoryDTO::getExpenses)
+                                    .filter(expenses -> expenses != null)
+                                    .mapToDouble(Double::doubleValue)
+                                    .sum())
                                 .startDate(budget.getStart())
                                 .build();
         

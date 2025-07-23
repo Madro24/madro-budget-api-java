@@ -18,12 +18,12 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping("/user/{username}")
-    public List<Transaction> getTransactionsByUser(@PathVariable Integer user) {
+    public List<Transaction> getTransactionsByUser(@PathVariable("username") Integer user) {
         return transactionService.getTransactionsByUser(user);
     }
     
     @GetMapping("/category/{category}")
-    public CategoryDetailsDTO getTransactionsByCategory(@PathVariable Integer category) {
+    public CategoryDetailsDTO getTransactionsByCategory(@PathVariable("category") Integer category) {
         return transactionService.getTransactionsByCategory(category);
     }
 

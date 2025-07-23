@@ -52,6 +52,15 @@ public class BudgetService {
             newBudget.setPreBalance(balance);
             newBudget.setUpdatedAt(new Date());
             budgetRepository.save(newBudget);
+        } else {
+            // Create new budget
+            Budget newBudget = new Budget();
+            newBudget.setStart(new Date()); // Set the appropriate start date
+            newBudget.setStatus(Budget.Status.ACTIVE);
+            newBudget.setPlanned(0f);
+            newBudget.setPreBalance(0f);
+            newBudget.setUpdatedAt(new Date());
+            budgetRepository.save(newBudget);
         }
     }
 
