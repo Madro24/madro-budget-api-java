@@ -21,7 +21,7 @@ public class TransactionCategoryController {
     }
 
     @GetMapping("/{category}")
-    public TransactionCategory getCategoryByName(@PathVariable String category) {
+    public TransactionCategory getCategoryByName(@PathVariable("category") String category) {
         return txCategoryService.getCategoryByName(category);
     }
     

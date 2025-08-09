@@ -30,8 +30,8 @@ public class BudgetController {
     }
 
     @GetMapping("/{budget}/transactions")
-    public List<Transaction> getBudgetTransactions(@PathVariable Integer budget) {
-        return budgetService.getTransactions(budget);
+    public List<Transaction> getBudgetTransactions(@PathVariable("budget") String budget) {
+        return budgetService.getTransactions(Integer.valueOf(budget));
     }
 
     @GetMapping("/active")
@@ -40,8 +40,8 @@ public class BudgetController {
     }
 
     @GetMapping("/{budget}")
-    public BudgetBalanceDTO getBudget(@PathVariable Integer budget) {
-        return budgetBalanceService.getBalance(budget);
+    public BudgetBalanceDTO getBudget(@PathVariable("budget") String budget) {
+        return budgetBalanceService.getBalance(Integer.valueOf(budget));
     }
 
 
