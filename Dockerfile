@@ -1,25 +1,4 @@
-
-
-FROM amazoncorretto:21 AS builder
-
-# Set working directory
-WORKDIR /build
-
-# Install protobuf compiler and required tools
-RUN yum update -y && \
-    yum install -y protobuf-compiler git unzip && \
-    yum clean all
-# Copy project files
-COPY gradlew .
-COPY gradle gradle
-COPY settings.gradle .
-COPY app app
-
-# Build the application
-RUN chmod +x ./gradlew && \
-    ./gradlew clean build --no-daemon
-
-FROM amazoncorretto:21-alpine-jdk
+FROM amazoncorretto:22-alpine-jdk
 
 # Install AWS CLI and required tools
 #RUN apk add --no-cache \
@@ -34,7 +13,7 @@ RUN mkdir -p /var/log && \
 WORKDIR /app
 
 # Copy application files from builder stage
-COPY --from=builder /build/app/build/libs/madro-budget-api.jar madro-budget-api.jar
+COPY ./app/build/libs/madro-budget-api.jar madro-budget-api.jar
 #COPY ./app/upload_heapdump_gc_s3.sh upload_heapdump_gc_s3.sh
 
 # Set execute permissions for the script
