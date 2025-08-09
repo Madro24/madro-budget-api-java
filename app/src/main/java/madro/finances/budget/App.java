@@ -4,11 +4,13 @@
 package madro.finances.budget;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@EnableAutoConfiguration
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+    net.devh.boot.grpc.server.autoconfigure.GrpcServerSecurityAutoConfiguration.class
+})
+@ComponentScan(basePackages = {"madro.finances.budget"})
 public class App {
     
 	public static void main(String[] args) {
