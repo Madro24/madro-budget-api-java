@@ -1,3 +1,6 @@
+server:
+  address: 0.0.0.0
+  port: 8080
 spring:
  config:
    import: optional:file:.env[.properties]
@@ -22,7 +25,14 @@ management:
         include: "*"
   endpoint:
     health:
-      show-details: always
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include: livenessState,ping
+        readiness:
+          include: readinessState,db
+      show-details: WHEN_AUTHORIZED
 
 app:
   security:

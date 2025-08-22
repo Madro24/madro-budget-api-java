@@ -41,7 +41,7 @@ public class SecurityConfig {
                 // Allow access to authentication endpoint
                 .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/auth/status").permitAll()
                 // Allow access to health check endpoints
-                .requestMatchers("/actuator/health", "/actuator/info").permitAll()
+                .requestMatchers("/actuator/health", "/actuator/info", "/actuator/health/liveness", "/actuator/health/readiness").permitAll()
                 // Allow access to Swagger UI and API docs
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 // Require authentication for all other endpoints
